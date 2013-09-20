@@ -1,5 +1,7 @@
 package AchewoodArchive;
 
+use Date::Parse;
+use POSIX;
 use parent qw(RSS::ArchiveReader);
 use strict;
 use utf8;
@@ -13,6 +15,17 @@ use constant {
     NEXT_PAGE        => '//a[normalize-space()="»"]/@href',
 };
 
+
+sub title {
+    my ($self, $tree, $uri) = @_;
+    my $title = $self->SUPER::title($tree, $uri);
+    if ($title =~ /^(achewood\s+\S+\s+)(.+)/is) {
+        if (defined(my $time = Date::Parse::str2time($2))) {
+            $title = $1 . POSIX::strftime('%A', gmtime $time) . ', ' . $2;
+        }
+    }
+    return $title;
+}
 
 sub render {
     my ($self, $tree) = @_;
