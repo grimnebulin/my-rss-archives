@@ -12,13 +12,13 @@ use constant {
 };
 
 
-sub get_tree {
+sub get_page {
     my ($self, $uri) = @_;
     for (1 .. 5) {
-        my $tree = eval { $self->SUPER::get_tree($uri) };
-        return $tree if $tree;
+        my $response = eval { $self->SUPER::get_page($uri) };
+        return $response if $response;
         die $@ if $@ !~ /Bad hostname/;
-        print STDERR "Trying again!\n";
+        # print STDERR "Trying again!\n";
     }
     return;
 }
