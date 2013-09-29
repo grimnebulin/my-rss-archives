@@ -14,6 +14,13 @@ use constant {
 };
 
 
+sub title {
+    my ($self, $tree, $uri) = @_;
+    my ($title) = $tree->findnodes($self->RENDER . '/@title')
+        or return $self->SUPER::title($tree, $uri);
+    return $title->getValue;
+}
+
 sub next_page {
     my ($self, $tree) = @_;
     my $href = $self->SUPER::next_page($tree);
