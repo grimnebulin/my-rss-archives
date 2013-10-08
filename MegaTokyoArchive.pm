@@ -21,12 +21,5 @@ sub title {
     return $title->getValue;
 }
 
-sub next_page {
-    my ($self, $tree) = @_;
-    my $href = $self->SUPER::next_page($tree);
-    $href =~ s|^\.(/strip/[^/]+)\z|$1|;
-    return $href;
-}
-
 
 1;
