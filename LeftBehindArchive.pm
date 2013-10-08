@@ -28,7 +28,7 @@ sub next_page {
 
     do {
         my ($href) = $tree->findnodes('//a[@rel="next"]/@href');
-        $uri = $href && URI->new_abs($href->getValue, $uri);
+        $uri = $href && $self->resolve($href->getValue, $tree, $uri);
         $tree = $uri && $self->get_tree($uri->clone);
     } while $tree && 0 == $tree->findnodes('//span[contains(@class,"categories")]//a[@rel="category tag"][contains(@title,"Left Behind")]')->size;
 
