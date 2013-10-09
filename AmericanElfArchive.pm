@@ -8,7 +8,6 @@ use constant {
     RSS_FILE       => "$ENV{HOME}/www/rss/americanelf.xml",
     FIRST_PAGE     => 'http://www.americanelf.com/comics/americanelf.php?view=single&ID=40945',
     ITEMS_TO_FETCH => 5,
-    ITEMS_TO_KEEP  => 20,
     RENDER         => '//img[contains(@src,"/~americanelf/comics/archival/")]',
     NEXT_PAGE      => '//a[img/@src[substring(.,string-length()-8)="/next.gif"]]/@href',
 };
