@@ -1,5 +1,6 @@
 package OglafArchive;
 
+use HTTP::Request::Common ();
 use parent qw(RSS::ArchiveReader);
 use strict;
 
@@ -12,9 +13,9 @@ use constant {
 };
 
 
-sub get_page {
+sub make_request {
     my ($self, $uri) = @_;
-    return $self->agent->post($uri, { over18 => 'y' });
+    return HTTP::Request::Common::POST($uri, { over18 => 'y' });
 }
 
 sub render {
