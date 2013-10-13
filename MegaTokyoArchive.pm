@@ -14,9 +14,9 @@ use constant {
 
 
 sub title {
-    my ($self, $tree, $uri) = @_;
-    my ($title) = $tree->findnodes($self->RENDER . '/@title')
-        or return $self->SUPER::title($tree, $uri);
+    my ($self, $doc) = @_;
+    my ($title) = $doc->findnodes($self->RENDER . '/@title')
+        or return $self->SUPER::title($doc);
     return $title->getValue;
 }
 

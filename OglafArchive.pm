@@ -18,8 +18,8 @@ sub get_page {
 }
 
 sub render {
-    my ($self, $tree) = @_;
-    my ($img) = $tree->findnodes('//img[@id="strip"]') or return;
+    my ($self, $doc) = @_;
+    my ($img) = $doc->findnodes('//img[@id="strip"]') or return;
     my $title = $img->attr('title');
     my $alt   = $img->attr('alt');
     return (

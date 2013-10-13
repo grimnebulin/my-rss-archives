@@ -22,21 +22,22 @@ sub get_page {
 }
 
 sub render {
-    my ($self, $tree) = @_;
-    my ($div) = $tree->findnodes('//div[contains(@class,"entry-content")]')
+    my ($self, $doc) = @_;
+    my ($div) = $doc->findnodes('//div[contains(@class,"entry-content")]')
         or return;
     $_->detach for $div->findnodes('.//br');
     return $div;
 }
 
 sub next_page {
-    my ($self, $tree, $uri) = @_;
+    my ($self, $doc) = @_;
+    my $uri;
 
     do {
-        my ($href) = $tree->findnodes('//a[@rel="next"]/@href');
-        $uri = $href && $self->resolve($href->getValue, $tree, $uri);
-        $tree = $uri && $self->get_tree($uri->clone);
-    } while $tree && 0 == $tree->findnodes('//span[contains(@class,"categories")]//a[@rel="category tag"][contains(@title,"Left Behind")]')->size;
+        my ($link) = $doc->findnodes('//a[@rel="next"]');
+        $uri = $link && $link->attr_absolute('href');
+        $doc = $uri && $self->get_doc($uri);
+    } while $doc && 0 == $doc->findnodes('//span[contains(@class,"categories")]//a[@rel="category tag"][contains(@title,"Left Behind")]')->size;
 
     return $uri;
 

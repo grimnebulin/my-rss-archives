@@ -14,9 +14,9 @@ use constant {
 
 
 sub title {
-    my ($self, $tree, $uri) = @_;
-    my $title = $self->SUPER::title($tree, $uri);
-    if (my ($img) = $self->render($tree, $uri)) {
+    my ($self, $doc) = @_;
+    my $title = $self->SUPER::title($doc);
+    if (my ($img) = $self->render($doc)) {
         $title .= " - $1" if $img->attr('src') =~ m|/(\d+-\d+-\d+)|;
     }
     return $title;

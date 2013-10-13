@@ -14,9 +14,9 @@ use constant {
 
 
 sub title {
-    my ($self, $tree) = @_;
-    my $img = $self->render($tree);
-    return $img ? $img->attr('alt') : $self->SUPER::title;
+    my ($self, $doc) = @_;
+    my $img = $self->render($doc);
+    return $img ? $img->attr('alt') : $self->SUPER::title($doc);
 }
 
 
