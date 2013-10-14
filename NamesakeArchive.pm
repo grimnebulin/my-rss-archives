@@ -12,4 +12,15 @@ use constant {
     NEXT_PAGE      => '//td[contains(@class,"comic_navi_right")]//a/@href',
 };
 
+
+sub title {
+    my ($self, $doc) = @_;
+    my $title = $self->SUPER::title($doc);
+    if (my $img = $self->render($doc)) {
+        $title .= " - $1" if $img->attr('src') =~ m|/(\d{4}-\d{2}-\d{2})-|;
+    }
+    return $title;
+}
+
+
 1;

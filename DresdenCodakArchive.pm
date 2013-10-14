@@ -12,4 +12,12 @@ use constant {
 };
 
 
+sub title {
+    my ($self, $doc) = @_;
+    my $title = $self->SUPER::title($doc);
+    $title .= " - $1-$2-$3" if $doc->source =~ m|/(\d{4})/(\d{2})/(\d{2})/|;
+    return $title;
+}
+
+
 1;

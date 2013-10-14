@@ -12,4 +12,15 @@ use constant {
     NEXT_PAGE      => '//a[contains(@class,"next-webcomic-link")]/@href',
 };
 
+
+sub title {
+    my ($self, $doc) = @_;
+    my $title = $self->SUPER::title($doc);
+    if (my ($bookmark) = $doc->findnodes('//a[@rel="bookmark"]')) {
+        $title .= ' - ' . $bookmark->as_trimmed_text;
+    }
+    return $title;
+}
+
+
 1;

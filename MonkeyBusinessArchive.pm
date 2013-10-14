@@ -12,4 +12,15 @@ use constant {
     NEXT_PAGE      => '//a[@id="comic-nav-next"]/@href',
 };
 
+
+sub title {
+    my ($self, $doc) = @_;
+    my $title = $self->SUPER::title($doc);
+    if (my ($date) = $doc->findnodes('//div[contains(@class,"post-date")]')) {
+        $title .= ' - ' . $date->as_trimmed_text;
+    }
+    return $title;
+}
+
+
 1;
