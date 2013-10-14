@@ -47,14 +47,16 @@ package LeftBehindArchive::Agent;
 
 use parent qw(LWP::UserAgent);
 
+my $ATTEMPTS = 5;
+
 sub request {
     my ($self, @args) = @_;
-    for my $attempt (1 .. 5) {
+    for my $attempt (1 .. $ATTEMPTS) {
         my $response = eval { $self->SUPER::request(@args) };
         return $response if $response;
         die $@ if $@ !~ /Bad hostname/;
     }
-    return;
+    die "Failed to download $args[0] after $ATTEMPTS attempts\n";
 }
 
 }
