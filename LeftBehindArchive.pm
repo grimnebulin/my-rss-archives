@@ -6,39 +6,19 @@ use strict;
 
 use constant {
     FEED_TITLE => 'Left Behind Archive',
-    RSS_FILE   => "$ENV{HOME}/www/rss/lbarc.xml",
+    RSS_FILE => "$ENV{HOME}/www/rss/lbarc.xml",
     FIRST_PAGE => 'http://www.patheos.com/blogs/slacktivist/2008/11/07/lb-rapture-ready/',
+    RENDER => '//div[contains(@class,"entry-content")]',
+    NEXT_PAGE => '//a[@rel="next"]/@href',
+    FILTER => '//span[contains(@class,"categories")]//' .
+              'a[@rel="category tag"][contains(@title,"Left Behind")]',
 };
-
-my $CATEGORY_IS_LB = '//span[contains(@class,"categories")]//' .
-                     'a[@rel="category tag"][contains(@title,"Left Behind")]';
 
 
 sub new {
-    my $class = shift;
-    return $class->SUPER::new(agent => LeftBehindArchive::Agent->new);
-}
-
-sub render {
-    my ($self, $doc) = @_;
-    my ($div) = $doc->findnodes('//div[contains(@class,"entry-content")]')
-        or return;
-    $_->detach for $div->find_by_tag_name('br');
-    return $div;
-}
-
-sub next_page {
-    my ($self, $doc) = @_;
-    my $uri;
-
-    do {
-        my ($link) = $doc->findnodes('//a[@rel="next"]');
-        $uri = $link && $link->attr_absolute('href');
-        $doc = $uri && $self->get_doc($uri);
-    } while $doc && 0 == $doc->findnodes($CATEGORY_IS_LB)->size;
-
-    return $uri;
-
+    return shift->SUPER::new(
+        agent => LeftBehindArchive::Agent->new(agent => "")
+    );
 }
 
 {
