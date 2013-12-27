@@ -16,7 +16,7 @@ sub render {
     my ($self, $doc) = @_;
     return map {
         $self->new_element(
-            'div', [ 'img', { src => $_->attr_absolute('href') } ]
+            'div', [ 'img', { src => $doc->resolve($_->attr('href')) } ]
         )
     } $doc->findnodes('//a[img[contains(@src,"/thumbs/")]]');
 }
