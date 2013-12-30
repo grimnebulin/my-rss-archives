@@ -8,16 +8,19 @@ use constant {
     RSS_FILE       => "$ENV{HOME}/www/rss/sluggy.xml",
     FIRST_PAGE     => 'http://www.sluggy.com/comics/archives/daily/970825',
     ITEMS_TO_FETCH => 3,
-    RENDER         => '//div[contains(@class,"comic_content")]//img[contains(@src,"/images/comics/")]',
+    RENDER         => [ '//div[%s]', 'comic_content' ],
     NEXT_PAGE      => '//div[@id="comic_navigation"]//a[normalize-space()="Next"]/@href',
 };
 
 
 sub title {
     my ($self, $doc) = @_;
-    my ($alt) = $doc->findnodes(RENDER . '/@alt')
-        or return $self->SUPER::title($doc);
-    return $alt->getValue;
+    if (my $div = $self->render($doc)) {
+        if (my ($alt) = $self->find($div, './/img/@alt')) {
+            return $alt->getValue;
+        }
+    }
+    return $self->SUPER::title($doc);
 }
 
 

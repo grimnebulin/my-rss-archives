@@ -8,7 +8,7 @@ use constant {
     RSS_FILE       => "$ENV{HOME}/www/rss/gunshow.xml",
     FIRST_PAGE     => 'http://gunshowcomic.com/1',
     ITEMS_TO_FETCH => 3,
-    RENDER         => '//div[@id="comic"]/img[contains(@class,"strip")]',
+    RENDER         => [ '//div[@id="comic"]/img[%s]', 'strip' ],
     NEXT_PAGE      => '//a[img[contains(@src,"next.gif")]]/@href',
 };
 
@@ -16,8 +16,8 @@ use constant {
 sub title {
     my ($self, $doc) = @_;
     my $title = $self->SUPER::title($doc);
-    if (my ($src) = $doc->findnodes(RENDER . '/@src')) {
-        if ($src->getValue =~ m|/comics/(\d\d\d\d)(\d\d)(\d\d)\b|) {
+    if (my $img = $self->render($doc)) {
+        if ($img->attr('src') =~ m|/comics/(\d\d\d\d)(\d\d)(\d\d)\b|) {
             $title .= " - $2/$3/$1";
         }
     }

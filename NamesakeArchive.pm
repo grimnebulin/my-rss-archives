@@ -9,7 +9,7 @@ use constant {
     FIRST_PAGE     => 'http://namesakecomic.com/comic/prologue-cover-3/',
     ITEMS_TO_FETCH => 3,
     RENDER         => '//div[@id="comic"]//img',
-    NEXT_PAGE      => '//td[contains(@class,"comic_navi_right")]//a/@href',
+    NEXT_PAGE      => [ '//td[%s]//a/@href', 'comic_navi_right' ],
 };
 
 

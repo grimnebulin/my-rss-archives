@@ -9,14 +9,14 @@ use constant {
     ITEMS_TO_FETCH => 3,
     FIRST_PAGE     => 'http://www.smbc-comics.com/?id=1#comic',
     RENDER         => '//div[@id="comicimage"]//img',
-    NEXT_PAGE      => '//a[contains(@class,"nextRollover")]/@href',
+    NEXT_PAGE      => [ '//a[%s]/@href', 'nextRollover' ],
 };
 
 
 sub title {
     my ($self, $doc) = @_;
     my $title = $self->SUPER::title($doc);
-    if (my ($img) = $self->render($doc)) {
+    if (my $img = $self->render($doc)) {
         if ($img->attr('src') =~ m|/comics/(\d{4})(\d{2})(\d{2})|) {
             $title .= " - $2/$3/$1";
         }
