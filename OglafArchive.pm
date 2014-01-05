@@ -10,6 +10,7 @@ use constant {
     FIRST_PAGE     => 'http://oglaf.com/cumsprite/',
     ITEMS_TO_FETCH => 5,
     NEXT_PAGE      => '//a[div[@id="nx"]]/@href',
+    END_OF_ARCHIVE_NOTIFY => 0,
 };
 
 
