@@ -10,9 +10,16 @@ use constant {
     ITEMS_TO_FETCH => 3,
     NEXT_PAGE      => '//a[img[starts-with(@alt,"Next")]]/@href',
     CACHE_DIR      => "$ENV{HOME}/www/cc/cascade",
-    CACHE_URL  => 'http://seanmcafee.name/cc/cascade',
+    CACHE_URL      => 'http://seanmcafee.name/cc/cascade',
 };
 
+
+sub title {
+    my ($self, $doc) = @_;
+    my $title = $self->SUPER::title($doc);
+    $title =~ s/\s+,/,/g;
+    return $title;
+}
 
 sub render {
     my ($self, $doc) = @_;
