@@ -8,7 +8,7 @@ use constant {
     FEED_TITLE     => 'Questionable Content Archive',
     RSS_FILE       => "$ENV{HOME}/www/rss/qcarchive.xml",
     FIRST_PAGE     => 'http://questionablecontent.net/view.php?comic=1',
-    ITEMS_TO_FETCH => 3,
+    ITEMS_TO_FETCH => 10,
     NEXT_PAGE      => '//a[normalize-space()="Next"]/@href',
 };
 
