@@ -8,7 +8,6 @@ use constant {
     RSS_FILE       => "$ENV{HOME}/www/rss/gunnerkrigg.xml",
     FIRST_PAGE     => 'http://www.gunnerkrigg.com/?p=1',
     ITEMS_TO_FETCH => 3,
-    RENDER         => '//img[contains(@class,"comic_image")]',
     NEXT_PAGE      => '//a[img[contains(@src,"next_a.jpg")]]/@href',
 };
 
@@ -23,6 +22,16 @@ sub title {
         $title .= " - $attr";
     }
     return $title;
+}
+
+sub render {
+    my ($self, $doc) = @_;
+    my ($img) = $doc->find('//img[%s]', 'comic_image') or return;
+    my ($content) = $doc->find('//div[%s]', 'content');
+    if ($content) {
+        $self->remove($content, 'a[contains(@href,"mailto")]|h4|div[%s]', 'ad_spot');
+    }
+    return ($img, $content);
 }
 
 
