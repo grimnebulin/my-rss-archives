@@ -10,7 +10,7 @@ use constant {
     FIRST_PAGE     => 'http://formalsweatpants.com/comic/cartooning/',
     ITEMS_TO_FETCH => 3,
     RENDER         => '//div[@id="comic"]//img',
-    NEXT_PAGE      => [ '//td[%s]//a[@title="Next"]/@href', 'comic_navi_right' ],
+    NEXT_PAGE      => [ '//a[%s]/@href', 'comic-nav-next' ],
 };
 
 1;
