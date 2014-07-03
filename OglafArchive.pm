@@ -1,6 +1,5 @@
 package OglafArchive;
 
-use HTTP::Request::Common ();
 use parent qw(RSS::ArchiveReader);
 use strict;
 
@@ -13,11 +12,6 @@ use constant {
     END_OF_ARCHIVE_NOTIFY => 0,
 };
 
-
-sub make_request {
-    my ($self, $uri) = @_;
-    return HTTP::Request::Common::POST($uri, { over18 => 'y' });
-}
 
 sub render {
     my ($self, $doc) = @_;
