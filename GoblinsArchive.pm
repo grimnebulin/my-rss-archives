@@ -9,7 +9,7 @@ use constant {
     FIRST_PAGE     => 'http://www.goblinscomic.org/06262005/',
     ITEMS_TO_FETCH => 5,
     RENDER         => '//div[@id="comic"]//img',
-    NEXT_PAGE      => '//div[@class="nav-next"]/a[@rel="next"]/@href',
+    NEXT_PAGE      => [ '//div[%s]/a[@rel="next"]/@href', 'nav-next' ],
 };
 
 1;
