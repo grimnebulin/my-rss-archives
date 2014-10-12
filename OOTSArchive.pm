@@ -8,7 +8,7 @@ use constant {
     RSS_FILE       => "$ENV{HOME}/www/rss/oots.xml",
     ITEMS_TO_FETCH => 5,
     FIRST_PAGE     => 'http://www.giantitp.com/comics/oots0001.html',
-    RENDER         => '//img[contains(@src,"/comics/images/oots")]',
+    RENDER         => '//img[contains(@src,"/comics/images/")]',
     NEXT_PAGE      => '//a[img[@title="Next Comic"]]/@href',
 };
 
