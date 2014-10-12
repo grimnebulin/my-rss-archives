@@ -11,4 +11,15 @@ use constant {
     NEXT_PAGE  => [ '//a[@rel="next"][%s]/@href', 'next-webcomic-link' ],
 };
 
+
+sub title {
+    my ($self, $doc) = @_;
+    my $title = $self->SUPER::title($doc);
+    if (my ($date) = $doc->find('//a[@rel="bookmark"]/time')) {
+        $title .= ' | ' . $date->as_trimmed_text;
+    }
+    return $title;
+}
+
+
 1;
