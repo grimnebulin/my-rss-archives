@@ -8,7 +8,8 @@ use constant {
     RSS_FILE   => "$ENV{HOME}/www/rss/larptrek.xml",
     FIRST_PAGE => 'http://larptrek.com/larptrek/1/',
     RENDER     => [ '//div[%s]/img', 'webcomic-image' ],
-    NEXT_PAGE  => [ '//a[@rel="next"][%s]/@href', 'next-webcomic-link' ],
+    NEXT_PAGE  => [ '//a[@rel="next"][%s and not(%s)]/@href', 'next-webcomic-link', 'current-webcomic' ],
+    END_OF_ARCHIVE_NOTIFY => 0,
 };
 
 
