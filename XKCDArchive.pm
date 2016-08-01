@@ -16,7 +16,7 @@ my $TOC_URL = 'http://xkcd.com/archive/';
 sub render {
     my ($self, $doc) = @_;
     my ($img) = $doc->find('//div[@id="comic"]/img') or return;
-    my $title = $img->attr('title');
+    my $title = $img->attr('title', undef);
     return (
         $img, $title && $self->new_element('p', [ 'i', $title ])
     );
