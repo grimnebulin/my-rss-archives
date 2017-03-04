@@ -8,14 +8,11 @@ use constant {
     FEED_TITLE => 'Crossed Archive',
     RSS_FILE   => "$ENV{HOME}/www/rss/crossed.xml",
     FIRST_PAGE => 'http://www.crossedcomic.com/webcomic/crossed-doa-part-1/3/',
-    NEXT_PAGE  => [ '//div[%s]//a[contains(.,"Next")]/@href', 'webcomic-nav' ],
+    NEXT_PAGE  => [ '//div[%s]//a[contains(.,"Next")]/@href|//div[%s]/p//a[contains(@href,"crossed-doa-part-")]/@href', 'webcomic-nav', 'entry-content' ],
     RENDER     => [ '//div[%s]//img[@width and @height]', 'entry-content' ],
+    COOKIES    => 1,
     AGENT_ID   => 'Anything',
 };
-
-sub AGENT_CONFIG {
-    return { cookie_jar => { } };
-}
 
 sub get_doc {
     my ($self, $uri) = @_;
