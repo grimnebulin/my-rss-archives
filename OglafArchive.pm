@@ -8,7 +8,7 @@ use constant {
     RSS_FILE       => "$ENV{HOME}/www/rss/oglaf.xml",
     FIRST_PAGE     => 'http://oglaf.com/cumsprite/',
     ITEMS_TO_FETCH => 5,
-    NEXT_PAGE      => '//a[div[@id="nx"]]/@href',
+    NEXT_PAGE      => '//a[@rel="next"]/@href',
     END_OF_ARCHIVE_NOTIFY => 0,
 };
 
